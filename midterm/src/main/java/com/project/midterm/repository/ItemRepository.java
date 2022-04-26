@@ -85,8 +85,8 @@ public class ItemRepository {
         List<Item> itemList = readItemListFromJson();
 
         itemList.stream().forEach(i -> System.out.println("상품 이름 : " + i.getName()
-                        + " 상품 금액 : " + i.getPrice() + "원"
-                        + " 상품 수량 : " + i.getQuantity()));
+                        + ", 상품 금액 : " + i.getPrice() + "원"
+                        + ", 상품 수량 : " + i.getQuantity()));
     }
 
     private void setId(Item item, List<Item> itemList) {

@@ -2,6 +2,7 @@ package com.project.midterm.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.project.midterm.entity.Item;
 import com.project.midterm.entity.Member;
 import com.project.midterm.entity.Order;
 import org.json.simple.JSONArray;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 public class OrderRepository {
 
     public void save(Order order) throws IOException, ParseException {
-        List<Order> orderList = readOrderListFromJson();
+        List<Order> orderList = findAll();
 
         setId(order, orderList);
 
@@ -34,8 +35,12 @@ public class OrderRepository {
         writeOrderListToJson(orderList);
     }
 
+    public List<Order> findAll() throws IOException, ParseException {
+        return readOrderListFromJson();
+    }
+
     public void findAllByMemberPrint(Member member) throws IOException, ParseException {
-        List<Order> orderList = readOrderListFromJson();
+        List<Order> orderList = findAll();
 
         List<Order> findOrderList = orderList
                 .stream()
@@ -43,8 +48,9 @@ public class OrderRepository {
                 .collect(Collectors.toList());
 
         findOrderList.stream().forEach(o -> System.out.println("주문 상품 이름 : " + o.getItem().getName()
-                + " 주문 상품 수량 : " + o.getItem().getQuantity() + "개"
-                + " 주문 상품 금액 : " + o.getItem().getPrice() + "원"));
+                + ", 주문 상품 수량 : " + o.getItem().getQuantity() + "개"
+                + ", 주문 상품 금액 : " + o.getItem().getPrice() + "원"
+                + ", 주문 시간 : " + o.getCreateDate()));
     }
 
     private void setId(Order order, List<Order> orderList) {

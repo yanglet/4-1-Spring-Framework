@@ -24,12 +24,12 @@ public class OrderServiceTest {
 
     @Test
     public void 판매_성공() throws IOException, ParseException {
-        Item item1 = itemRepository.findByCode("item1");
+        Item item = itemRepository.findByCode("item4");
         Member findMember = memberRepository.findByEmail("test1@naver.com");
 
-        Long result = orderService.sale(item1, findMember, 2L, 50000L);
+        Long result = orderService.sale(item, findMember, 5L, 200000L);
 
-        Assertions.assertThat(result).isEqualTo(10000L);
+        Assertions.assertThat(result).isEqualTo(120000L);
     }
 
     @Test
