@@ -67,6 +67,16 @@ public class ItemRepository {
         writeItemListToJson(itemList);
     }
 
+    public Item findByName(String name) throws IOException, ParseException {
+        List<Item> itemList = findAll();
+
+        return itemList
+                .stream()
+                .filter(i -> i.getName().equals(name))
+                .findAny()
+                .orElseThrow();
+    }
+
     public Item findByCode(String code) throws IOException, ParseException {
         List<Item> itemList = findAll();
 
@@ -87,6 +97,7 @@ public class ItemRepository {
         itemList.stream().forEach(i -> System.out.println("상품 이름 : " + i.getName()
                         + ", 상품 금액 : " + i.getPrice() + "원"
                         + ", 상품 수량 : " + i.getQuantity()));
+        System.out.println();
     }
 
     private void setId(Item item, List<Item> itemList) {

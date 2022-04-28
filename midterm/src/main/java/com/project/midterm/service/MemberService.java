@@ -39,9 +39,10 @@ public class MemberService {
 
     public void join(Member member) throws IOException, ParseException {
         if( !isValidateDuplicateMember(member) ){
+            member.setRole("user");
             memberRepository.save(member);
         }else{
-            System.out.println("사용중인 이메일입니다.\n다시 입력해주세요.");
+            System.out.println("사용중인 이메일입니다.\n다시 입력해주세요.\n");
         }
     }
 

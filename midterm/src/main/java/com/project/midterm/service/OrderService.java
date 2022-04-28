@@ -35,7 +35,7 @@ public class OrderService {
         Long remainingStock = item.getQuantity() - quantity;
 
         if(remainingStock <= 0){
-            System.out.println("상품의 수량이 부족합니다.\n상품 수량 : " + item.getQuantity() + "개");
+            System.out.println("상품의 수량이 부족합니다.\n잔여 상품 수량 : " + item.getQuantity() + "개\n");
             return -1L;
         }
 
@@ -58,11 +58,11 @@ public class OrderService {
             
             orderRepository.save(order);
 
-            System.out.println("거스름 돈 : " + change + "원");
+            System.out.println("거스름 돈 : " + change + "원\n");
 
             return change;
         }else{
-            System.out.println("금액이 부족합니다.");
+            System.out.println("금액이 부족합니다.\n");
             return -1L;
         }
     }

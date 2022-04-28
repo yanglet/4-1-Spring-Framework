@@ -51,6 +51,7 @@ public class OrderRepository {
                 + ", 주문 상품 수량 : " + o.getItem().getQuantity() + "개"
                 + ", 주문 상품 금액 : " + o.getItem().getPrice() + "원"
                 + ", 주문 시간 : " + o.getCreateDate()));
+        System.out.println();
     }
 
     private void setId(Order order, List<Order> orderList) {
