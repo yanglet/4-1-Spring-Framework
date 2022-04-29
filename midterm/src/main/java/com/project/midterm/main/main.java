@@ -39,6 +39,7 @@ public class main {
             int number = scanNumber();
 
             if(number >= 10000){
+                System.out.println("종료합니다.");
                 return;
             }
 
@@ -81,6 +82,7 @@ public class main {
                 System.out.println("===================================");
                 System.out.println("재고관리를 선택하셨습니다.");
                 System.out.println("===================================");
+                selectManagement();
                 break;
             case 6:
                 System.out.println("===================================");
@@ -153,12 +155,13 @@ public class main {
     }
 
     private static void selectOrderList() throws IOException, ParseException {
-        orderRepository.findAll();
+        orderRepository.findAllByMemberPrint(member);
     }
 
     private static void selectManagement() throws IOException, ParseException {
         if( !member.getRole().equals("manager") ){
             System.out.println("권한이 없습니다.\n관리자에게 문의하세요.");
+            return;
         }
 
         System.out.println("===================================");

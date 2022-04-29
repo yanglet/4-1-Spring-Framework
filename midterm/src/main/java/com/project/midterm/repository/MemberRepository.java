@@ -81,7 +81,6 @@ public class MemberRepository {
 
         System.out.println("총 회원수 : " + memberList.size() + "명");
         memberList.stream().forEach(m -> System.out.println("회원 이름 : " + m.getName()));
-        System.out.println();
     }
 
     private void setId(Member member, List<Member> memberList) {

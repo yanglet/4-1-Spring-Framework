@@ -48,7 +48,6 @@ public class AnalysisService {
                 .forEach(o -> System.out.println("구매자 : " + o.getMember().getName()
                         + ", 판매 상품 이름 : " + o.getItem().getName()
                         + ", 판매 수량 : " + o.getItem().getQuantity()));
-        System.out.println();
     }
 
     public void printPerWeek() throws IOException, ParseException {
@@ -62,7 +61,6 @@ public class AnalysisService {
                 .forEach(o -> System.out.println("구매자 : " + o.getMember().getName()
                         + ", 판매 상품 이름 : " + o.getItem().getName()
                         + ", 판매 수량 : " + o.getItem().getQuantity()));
-        System.out.println();
     }
 
     // month = 1 이면 지난 1달간 판매량
@@ -77,7 +75,6 @@ public class AnalysisService {
                 .forEach(o -> System.out.println("구매자 : " + o.getMember().getName()
                         + ", 판매 상품 이름 : " + o.getItem().getName()
                         + ", 판매 수량 : " + o.getItem().getQuantity()));
-        System.out.println();
     }
 
     // 매출액
@@ -95,7 +92,7 @@ public class AnalysisService {
             sales += o.getTotalPrice();
         }
 
-        System.out.println("매출액 : " + sales + "원\n");
+        System.out.println("매출액 : " + sales + "원");
     }
 
     public void printTopItem() throws IOException, ParseException {
@@ -105,7 +102,7 @@ public class AnalysisService {
                 .orElseThrow()
                 .getItem();
 
-        System.out.println("최다 판매 상품 : " + item.getName() + "\n");
+        System.out.println("최다 판매 상품 : " + item.getName());
     }
 
     public Period getPeriod(LocalDateTime createTime){
