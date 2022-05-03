@@ -151,7 +151,7 @@ public class main {
 
         orderService.sale(itemRepository.findByName(itemName), member, itemQuantity, money);
 
-        System.out.println("구매해주셔서 감사합니다!\n");
+        System.out.println("구매해주셔서 감사합니다!");
     }
 
     private static void selectOrderList() throws IOException, ParseException {
@@ -188,12 +188,12 @@ public class main {
 
                 itemRepository.save(newItem);
                 System.out.println("상품이 추가되었습니다.");
-                System.out.println("상품 이름 : " + newItem.getName() + "\n");
+                System.out.println("상품 이름 : " + newItem.getName());
                 break;
             case 2:
                 System.out.println("삭제하실 상품의 코드를 입력해주세요.");
                 itemRepository.delete( new Scanner(System.in).next() );
-                System.out.println("상품이 삭제되었습니다.\n");
+                System.out.println("상품이 삭제되었습니다.");
                 break;
             case 3:
                 System.out.println("재고 관리할 상품의 코드를 입력해주세요.");
@@ -205,12 +205,12 @@ public class main {
 
                 if( stockNum.charAt(0) == '+' ){
                     itemService.addStock(findItem, Long.valueOf(stockNum));
-                    System.out.println("상품이 " + Long.valueOf(stockNum) + "만큼 추가되었습니다.\n");
+                    System.out.println("상품이 " + Long.valueOf(stockNum) + "만큼 추가되었습니다.");
                 }else if( stockNum.charAt(0) == '-' ){
                     itemService.removeStock(findItem, Long.valueOf(stockNum) * -1L);
-                    System.out.println("상품이 " + Long.valueOf(stockNum) * -1L + "만큼 제거되었습니다.\n");
+                    System.out.println("상품이 " + Long.valueOf(stockNum) * -1L + "만큼 제거되었습니다.");
                 }else{
-                    System.out.println("잘못된 입력입니다.\n");
+                    System.out.println("잘못된 입력입니다.");
                 }
                 break;
             case 4:
@@ -224,6 +224,7 @@ public class main {
     private static void selectAnalysis() throws IOException, ParseException {
         if( !member.getRole().equals("manager") ){
             System.out.println("권한이 없습니다.\n관리자에게 문의하세요.");
+            return;
         }
 
         System.out.println("===================================");
