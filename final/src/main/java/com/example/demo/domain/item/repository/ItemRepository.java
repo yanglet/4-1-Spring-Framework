@@ -27,8 +27,12 @@ public class ItemRepository {
         return jdbcTemplate.query("select * from item", new ItemMapper());
     }
 
-    public void updateQuantity(Item item){
-        jdbcTemplate.update("update item set quantity = ? where item_id = ?",
+    public void update(Item item){
+        jdbcTemplate.update("update item set code = ?, name = ?, price = ?, quantity = ?" +
+                        "  where item_id = ?",
+                item.getCode(),
+                item.getName(),
+                item.getPrice(),
                 item.getQuantity(),
                 item.getItem_id());
     }

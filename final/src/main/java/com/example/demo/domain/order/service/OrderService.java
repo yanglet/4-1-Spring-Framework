@@ -6,6 +6,7 @@ import com.example.demo.domain.member.entity.Member;
 import com.example.demo.domain.order.entity.Order;
 import com.example.demo.domain.order.repository.OrderRepository;
 import com.example.demo.domain.orderitem.entity.OrderItem;
+import com.example.demo.domain.orderitem.repository.OrderItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final ItemRepository itemRepository;
+    private final OrderItemRepository orderItemRepository;
 
     public void sale(Member member, List<OrderItem> orderItemList){
         int orderTotalPrice = 0;
@@ -24,20 +26,22 @@ public class OrderService {
         /**
          * 뷰에서 개수에 관해서 오류가 안나게 잘 해야함
          */
+        Order order = Order.builder()
+                .member(member)
+                .orderItemList(orderItemList)
+                .createTime(LocalDateTime.now())
+                .build();
 
         for(OrderItem oi : orderItemList){
             orderTotalPrice += oi.getTotalPrice();
             Item findItem = itemRepository.findByCode(oi.getItem().getCode());
             findItem.setQuantity(findItem.getQuantity() - oi.getQuantity());
-            itemRepository.updateQuantity(findItem);
+            itemRepository.update(findItem);
+            oi.setOrder(order);
+            orderItemRepository.save(oi);
         }
 
-        Order order = Order.builder()
-                .member(member)
-                .orderItemList(orderItemList)
-                .totalPrice(orderTotalPrice)
-                .createTime(LocalDateTime.now())
-                .build();
+        order.setTotalPrice(orderTotalPrice);
 
         orderRepository.save(order);
     }

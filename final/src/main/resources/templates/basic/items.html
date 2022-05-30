@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <style>
+        .field-error {
+            border-color: red;
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -22,8 +28,8 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/main">메인</a></li>
-            <li><a href="/items">상품 관리</a></li>
+            <li><a href="/main">메인</a></li>
+            <li class="active"><a href="/items">상품 관리</a></li>
             <li><a href="/order">주문</a></li>
             <li><a href="/orders">주문 내역</a></li>
         </ul>
@@ -36,18 +42,38 @@
 </nav>
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">메인페이지</h1>
+        <h1 class="display-3">상품 관리</h1>
     </div>
 </div>
 <div class="container">
-    <div class="jumbotron">
-        <div class="container">
-            <h1>POS System</h1>
-            <p>메인페이지입니다.</p>
-            <p><a class="btn btn-primary btn-pull" href="#" role="button">그냥 파란 버튼</a></p>
+    <div class="py-5 text-center">
+        <hr class="my-4">
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>코드</th>
+                    <th>이름</th>
+                    <th>가격</th>
+                    <th>수량</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.code}">10000</td>
+                    <td th:text="${item.name}">10</td>
+                    <td th:text="${item.price}">10000</td>
+                    <td th:text="${item.quantity}">10</td>
+                    <td>
+                        <a href="#" th:href="@{/items/{item_id}/edit (item_id=${item.item_id})}" class="btn btn-primary" role="button">수정</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="/items/new" class="btn btn-primary" role="button">새상품 입고</a>
         </div>
+        <hr class="my-4">
     </div>
-</div>
-<div th:include="menu/footer.html" ></div>
+    <div th:include="menu/footer.html" ></div>
 </body>
 </html>
