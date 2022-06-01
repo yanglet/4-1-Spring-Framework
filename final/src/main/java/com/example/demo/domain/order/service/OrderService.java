@@ -32,6 +32,10 @@ public class OrderService {
                 .createTime(LocalDateTime.now())
                 .build();
 
+        orderRepository.save(order);
+
+        order = orderRepository.findByCreateTime(order.getCreateTime());
+
         for(OrderItem oi : orderItemList){
             orderTotalPrice += oi.getTotalPrice();
             Item findItem = itemRepository.findByCode(oi.getItem().getCode());
@@ -43,6 +47,22 @@ public class OrderService {
 
         order.setTotalPrice(orderTotalPrice);
 
-        orderRepository.save(order);
+        order.getOrderItemList().forEach(o -> System.out.println("o = " + o.getItem().getName()));
+
+        orderRepository.update(order);
+    }
+
+    public int salesPerDay(){
+        int total_price = 0;
+
+        for(Order o : orderRepository.findAllPerDay(1)){
+            total_price += o.getTotalPrice();
+        }
+
+        return total_price;
+    }
+
+    public String bestSeller(){
+        return orderItemRepository.findBestSeller().getItem().getName();
     }
 }

@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <style>
+        .field-error {
+            border-color: red;
+            color: red;
+        }
         th {
             text-align: center;
         }
@@ -30,8 +34,8 @@
             <li><a href="/main">메인</a></li>
             <li><a href="/items">상품 관리</a></li>
             <li><a href="/order">주문</a></li>
-            <li class="active"><a href="/orders">주문 내역</a></li>
-            <li><a href="/analysis">통계</a></li>
+            <li><a href="/orders">주문 내역</a></li>
+            <li class="active"><a href="/analysis">통계</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li sec:authorize="isAnonymous()"><a href="/loginForm">로그인</a></li>
@@ -42,7 +46,7 @@
 </nav>
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">주문 내역</h1>
+        <h1 class="display-3">통계</h1>
     </div>
 </div>
 <div class="container">
@@ -52,27 +56,21 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>직원 이름</th>
-                    <th>주문 상품명 1 / 수량</th>
-                    <th>주문 상품명 2 / 수량</th>
-                    <th>총 가격</th>
-                    <th>주문 시간</th>
+                    <th>매출액</th>
+                    <th>최다 판매 상품</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="order : ${orders}">
-                    <td th:text="${order.member.name}">10000</td>
-                    <td th:if="${order.orderItemList.size() >= 1}"
-                        th:text="${order.orderItemList.get(0).item.name + ' / ' + order.orderItemList.get(0).quantity + '개'}">10</td>
-                    <td th:if="${order.orderItemList.size() == 1}"
-                        th:text="'  '">10</td>
-                    <td th:if="${order.orderItemList.size() >= 2}"
-                        th:text="${order.orderItemList.get(1).item.name + ' / ' + order.orderItemList.get(1).quantity + '개'} ">10</td>
-                    <td th:text="${order.totalPrice}">10000</td>
-                    <td th:text="${order.createTime}">10</td>
+                <tr>
+                    <td th:text="${salesPerDay}">10000</td>
+                    <td th:text="${bestSeller}">10</td>
                 </tr>
                 </tbody>
             </table>
+            <br /><br />
+            <a href="#" th:href="@{/analysis/day}" class="btn btn-primary" role="button">하루 판매량</a>
+            <a href="#" th:href="@{/analysis/week}" class="btn btn-primary" role="button">일주일 판매량</a>
+            <a href="#" th:href="@{/analysis/month}" class="btn btn-primary" role="button">한달 판매량</a>
         </div>
         <hr class="my-4">
     </div>

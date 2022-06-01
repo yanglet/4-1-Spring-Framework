@@ -39,4 +39,9 @@ public class OrderItemRepository {
         return jdbcTemplate.query("select * from orderitem where order_id = ?",
                 orderItemMapper, order_id);
     }
+
+    public OrderItem findBestSeller(){
+        return jdbcTemplate.query("select * from orderitem group by item_id order by sum(quantity) desc limit 1",
+                orderItemMapper).get(0);
+    }
 }

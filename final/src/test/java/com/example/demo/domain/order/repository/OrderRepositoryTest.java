@@ -28,7 +28,7 @@ public class OrderRepositoryTest {
                 .createTime(LocalDateTime.now())
                 .build();
 
-//        orderRepository.save(order);
+        orderRepository.save(order);
     }
 
     @Test
@@ -36,5 +36,16 @@ public class OrderRepositoryTest {
         List<Order> orderList = orderRepository.findAll();
         System.out.println("orderitem 개수 = " + orderList.get(0).getOrderItemList().get(0).getQuantity());
         Assertions.assertThat(orderList.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void 판매량(){
+        List<Order> allPerDay = orderRepository.findAllPerDay(1);
+        List<Order> allPerWeek = orderRepository.findAllPerWeek(1);
+        List<Order> allPerMonth = orderRepository.findAllPerMonth(1);
+
+        Assertions.assertThat(allPerDay.size()).isEqualTo(1);
+        Assertions.assertThat(allPerWeek.size()).isEqualTo(1);
+        Assertions.assertThat(allPerMonth.size()).isEqualTo(1);
     }
 }

@@ -7,12 +7,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <style>
-        .field-error {
-            border-color: red;
-            color: red;
-        }
-    </style>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -32,6 +26,7 @@
             <li><a href="/items">상품 관리</a></li>
             <li class="active"><a href="/order">주문</a></li>
             <li><a href="/orders">주문 내역</a></li>
+            <li><a href="/analysis">통계</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li sec:authorize="isAnonymous()"><a href="/loginForm">로그인</a></li>

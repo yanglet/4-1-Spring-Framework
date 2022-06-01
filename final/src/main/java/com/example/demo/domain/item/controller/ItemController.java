@@ -4,6 +4,7 @@ import com.example.demo.domain.item.dto.ItemForm;
 import com.example.demo.domain.item.entity.Item;
 import com.example.demo.domain.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,18 +21,21 @@ import java.time.LocalDateTime;
 public class ItemController {
     private final ItemRepository itemRepository;
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/items")
     public String items(Model model){
         model.addAttribute("items", itemRepository.findAll());
         return "basic/items";
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/items/new")
     public String newItemForm(Model model){
         model.addAttribute("itemForm", new ItemForm());
         return "basic/createItemForm";
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/items/new")
     public String createItem(@Validated @ModelAttribute("itemForm") ItemForm itemForm,
                              BindingResult bindingResult){
@@ -52,6 +56,7 @@ public class ItemController {
         }
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/items/{item_id}/edit")
     public String updateItemForm(@PathVariable("item_id") Long item_id, Model model){
         Item item = itemRepository.findById(item_id);
@@ -67,6 +72,7 @@ public class ItemController {
         return "basic/updateItemForm";
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/items/{item_id}/edit")
     public String updateItem(@Validated @ModelAttribute("itemForm") ItemForm itemForm,
                              BindingResult bindingResult,
@@ -75,6 +81,7 @@ public class ItemController {
             return "basic/createItemForm";
         }else{
             Item item = Item.builder()
+                    .item_id(itemRepository.findByName(itemForm.getName()).getItem_id())
                     .code(itemForm.getCode())
                     .name(itemForm.getName())
                     .price(itemForm.getPrice())

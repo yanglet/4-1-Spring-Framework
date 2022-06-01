@@ -30,8 +30,8 @@
             <li><a href="/main">메인</a></li>
             <li><a href="/items">상품 관리</a></li>
             <li><a href="/order">주문</a></li>
-            <li class="active"><a href="/orders">주문 내역</a></li>
-            <li><a href="/analysis">통계</a></li>
+            <li><a href="/orders">주문 내역</a></li>
+            <li class="active"><a href="/analysis">통계</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li sec:authorize="isAnonymous()"><a href="/loginForm">로그인</a></li>
@@ -42,7 +42,7 @@
 </nav>
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">주문 내역</h1>
+        <h1 class="display-3">통계</h1>
     </div>
 </div>
 <div class="container">
@@ -73,6 +73,7 @@
                 </tr>
                 </tbody>
             </table>
+            <a href="#" th:href="@{/analysis}" class="btn btn-primary" role="button">목록</a>
         </div>
         <hr class="my-4">
     </div>
