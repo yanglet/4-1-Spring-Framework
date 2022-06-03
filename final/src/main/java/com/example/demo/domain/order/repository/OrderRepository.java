@@ -28,15 +28,15 @@ public class OrderRepository {
     }
 
     public List<Order> findAllPerDay(int day){
-        return jdbcTemplate.query("select * from orders where create_time - now() < " + day, orderMapper);
+        return jdbcTemplate.query("select * from orders where datediff(now(), create_time) < " + day, orderMapper);
     }
 
     public List<Order> findAllPerWeek(int week){
-        return jdbcTemplate.query("select * from orders where create_time - now() < " + week * 7, orderMapper);
+        return jdbcTemplate.query("select * from orders where datediff(now(), create_time) < " + week * 7, orderMapper);
     }
 
     public List<Order> findAllPerMonth(int month){
-        return jdbcTemplate.query("select * from orders where create_time - now() < " + month * 31, orderMapper);
+        return jdbcTemplate.query("select * from orders where datediff(now(), create_time) < " + month * 31, orderMapper);
     }
 
     public void update(Order order){

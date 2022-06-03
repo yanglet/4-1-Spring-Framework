@@ -19,15 +19,22 @@ repositories {
 }
 
 dependencies {
+	// jdbc 추가
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	// Spring Security 추가
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// Thymeleaf 추가
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// 데이터 유효성 검사를 위한 Validation 라이브러리 추가
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	// Spring Web 추가
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// Thymeleaf 에서 Spring Security 와 관련한 기능을 사용하기 위해 추가
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
+	// 코드 축소 및 가독성을 위해 lombok 추가
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'

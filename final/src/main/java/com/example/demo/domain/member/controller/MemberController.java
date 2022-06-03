@@ -18,12 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping
-    public String main(){
-        return "basic/main";
-    }
-
-    @GetMapping("/main")
+    @GetMapping({"/","/main"})
     public String mainForm(){
         return "basic/main";
     }
